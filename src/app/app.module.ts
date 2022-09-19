@@ -11,6 +11,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DxDataGridModule } from 'devextreme-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { LayoutComponent } from './layout/layout.component';
 import { TransactionAcceptComponent } from './transaction.accept/transaction.accept.component';
+
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import { TransactionAcceptComponent } from './transaction.accept/transaction.acc
     MatTabsModule,
     MatTableModule,
     MatPaginatorModule,
-    FontAwesomeModule
+    FontAwesomeModule,    
+    DxDataGridModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

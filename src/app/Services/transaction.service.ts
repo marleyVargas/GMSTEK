@@ -23,7 +23,7 @@ const detail : TransactionDetail[] = [
 
 const ELEMENT_DATA: Transaction[] = [
     {
-      date: new Date(21,9,25,8,15,0,0),
+      date: new Date(2021,9,25,8,15,0,0),
       merchInvoice: 123456,
       merchant: 'ABC Fuel Company',
       location: 'Miami International Air',
@@ -35,11 +35,11 @@ const ELEMENT_DATA: Transaction[] = [
       card: 'AIR Card 1234',
       status: 'New',
       detail: detail,
-      transactionCreated: new Date(21,9,25,8,15,0,0),
-      transactionDelayed: new Date(21,9,30,8,15,0,0),
+      transactionCreated: new Date(2021,9,25,8,15,0,0),
+      transactionDelayed: new Date(2021,9,30,8,15,0,0),
     },
     {
-        date: new Date(21,10,1,8,15,0,0),
+        date: new Date(2021,10,1,8,15,0,0),
         merchInvoice: 542141,
         merchant: 'DEF Fuel Company',
         location: 'Miami International Air',
@@ -51,11 +51,11 @@ const ELEMENT_DATA: Transaction[] = [
         card: 'AIR Card 1234',
         status: 'New',
         detail: detail,
-        transactionCreated: new Date(21,9,25,8,15,0,0),
-        transactionDelayed: new Date(21,9,30,8,15,0,0),
+        transactionCreated: new Date(2021,9,25,8,15,0,0),
+        transactionDelayed: new Date(2021,9,30,8,15,0,0),
       },
       {
-        date: new Date(21,10,1,8,15,0,0),
+        date: new Date(2021,10,1,8,15,0,0),
         merchInvoice: 123456,
         merchant: 'ABC Fuel Company',
         location: 'Miami International Air',
@@ -71,7 +71,7 @@ const ELEMENT_DATA: Transaction[] = [
         transactionDelayed: new Date(21,9,30,8,15,0,0),
       },
       {
-        date: new Date(21,10,1,8,15,0,0),
+        date: new Date(2021,10,1,8,15,0,0),
         merchInvoice: 777222,
         merchant: 'DEF Fuel Company',
         location: 'Miami International Air',
@@ -83,11 +83,11 @@ const ELEMENT_DATA: Transaction[] = [
         card: 'AIR Card 1234',
         status: 'New',
         detail: detail,
-        transactionCreated: new Date(21,9,25,8,15,0,0),
-        transactionDelayed: new Date(21,9,30,8,15,0,0),
+        transactionCreated: new Date(2021,9,25,8,15,0,0),
+        transactionDelayed: new Date(2021,9,30,8,15,0,0),
       },
       {
-        date: new Date(21,9,30,8,15,0,0),
+        date: new Date(2021,9,30,8,15,0,0),
         merchInvoice: 777222,
         merchant: 'ABC Fuel Company',
         location: 'Miami International Air',
@@ -99,11 +99,11 @@ const ELEMENT_DATA: Transaction[] = [
         card: 'AIR Card 1234',
         status: 'New',
         detail: detail,
-        transactionCreated: new Date(21,9,25,8,15,0,0),
-        transactionDelayed: new Date(21,9,30,8,15,0,0),
+        transactionCreated: new Date(2021,9,25,8,15,0,0),
+        transactionDelayed: new Date(2021,9,30,8,15,0,0),
       },
       {
-        date: new Date(21,9,30,8,15,0,0),
+        date: new Date(2021,9,30,8,15,0,0),
         merchInvoice: 777222,
         merchant: 'DEF Fuel Company',
         location: 'Miami International Air',
@@ -115,8 +115,8 @@ const ELEMENT_DATA: Transaction[] = [
         card: 'AIR Card 1234',
         status: 'New',
         detail: detail,
-        transactionCreated: new Date(21,9,25,8,15,0,0),
-        transactionDelayed: new Date(21,9,30,8,15,0,0),
+        transactionCreated: new Date(2021,9,25,8,15,0,0),
+        transactionDelayed: new Date(2021,9,30,8,15,0,0),
       }
     
   ];

@@ -2,8 +2,15 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { DxDataGridComponent,DxTemplateModule } from 'devextreme-angular';
+import { exportDataGrid, } from 'devextreme/excel_exporter';
 import { Transaction } from '../models/transaction';
 import { TransactionService } from '../Services/transaction.service';
+import { Workbook } from 'exceljs';
+import { saveAs } from 'file-saver';
+import { exportDataGrid as exportDataGridToPdf } from 'devextreme/pdf_exporter';
+import { jsPDF } from 'jspdf';
+
 
 @Component({
   selector: 'app-transaction-accept',
@@ -23,31 +30,9 @@ export class TransactionAcceptComponent implements OnInit {
   columnsToDisplay = ['date', 'merchInvoice', 'merchant', 'location', 'icao', 'dodaac', 'tail', 'item', 'total', 'card', 'status'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement!: Transaction | null;
-
-  // MatPaginator Inputs
-  length = 0;
-  pageSize = 10;
-  pageSizeOptions: number[] = [];
-
-  // MatPaginator Output
-  pageEvent!: PageEvent;
-
-  paginaConsulta: number = 1;
-  totalRegister: number = this.dataSource.length;
-  currentPage: number = 1;
-  totalPages: number = 1;
-
-  setPageSizeOptions(setPageSizeOptionsInput: string) {
-    if (setPageSizeOptionsInput) {
-      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
-    }
-  }
   
+  @ViewChild('tableTransaction') dataGrid!: DxDataGridComponent;
    
-  @ViewChild(MatPaginator) set paginator(pag: MatPaginator) {
-    
-  }
-  
   constructor(
     public transactionService: TransactionService,
   ) { }
@@ -60,11 +45,32 @@ export class TransactionAcceptComponent implements OnInit {
     this.dataSource = this.transactionService.getData();
   }
 
-  pageEventClic(pageEvent: PageEvent) {
-    this.paginaConsulta += 1;
-    if(this.paginaConsulta <= this.totalPages){
-      this.getTransactionsAccept();
-    }      
-  }
+  exportGrid(e: { format: string; component: any; cancel: boolean; }) {
+    if (e.format === 'xlsx') {
+        const workbook = new Workbook(); 
+        const worksheet = workbook.addWorksheet("Main sheet"); 
+        exportDataGrid({ 
+            worksheet: worksheet, 
+            component: e.component,
+        }).then(function() {
+            workbook.xlsx.writeBuffer().then(function(buffer) { 
+                saveAs(new Blob([buffer], { type: "application/octet-stream" }), "TransactionsToAccept.xlsx"); 
+            }); 
+        }); 
+        e.cancel = true;
+    } 
+    else if (e.format === 'pdf') {
+        const doc = new jsPDF();
+        exportDataGridToPdf({
+            jsPDFDocument: doc,
+            component: e.component,
+        }).then(() => {
+            doc.save('TransactionsToAccept.pdf');
+        });
+    }
+}
 
+  seleccionarColumnas() {
+    this.dataGrid.instance.showColumnChooser();
+  }
 }

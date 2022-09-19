@@ -1,87 +1,61 @@
 <div class="card-body">
-    <div class="row">
-        <div class="col-sm-9">
-            <div class="d-flex flex-row mb-3">
-                <form class="d-flex col-sm-8 me-md-2" role="flex Search">
-                    <input class="form-control me-auto" type="search" placeholder="Search transactions by Merchant Invoice, Card, ICAO, Tail # or DoDAAC" aria-label="Search">
-                </form>
-                <button class="btn btn-light">
-                    <i class="fa fa-filter"></i>
-                    Filter
-                </button>
-            </div>
-        </div>
-        <div class="col-sm-3">                    
-            <button class="btn btn-light me-md-4"><mat-icon>local_printshop</mat-icon>Print Selected</button>
-            <button class="btn btn-light"><mat-icon> import_export</mat-icon>Export Selected</button>
-        </div>
-     </div>
-</div>
-<div class="card-body">
-    <table id="tableTransaction" mat-table 
-    [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8"
-    [showColumnLines]="false" [showRowLines]="true" [showBorders]="true" [rowAlternationEnabled]="true"
-    [columnAutoWidth]="true" [allowColumnReordering]="true" [allowColumnResizing]="true">
-        <ng-container matColumnDef="date">
-            <th mat-header-cell *matHeaderCellDef><b>Date</b></th>
-            <td mat-cell *matCellDef="let element"> {{element.date | date: "MM/dd/yy"}} </td>
-        </ng-container>
-        <ng-container matColumnDef="merchInvoice">
-            <th mat-header-cell *matHeaderCellDef><b>Merchant Invoce</b></th>
-            <td mat-cell *matCellDef="let element"> {{element.merchInvoice}} </td>
-        </ng-container>
-        <ng-container matColumnDef="merchant">
-            <th mat-header-cell *matHeaderCellDef><b>Merchant</b></th>
-            <td mat-cell *matCellDef="let element"> {{element.merchant}} </td>
-        </ng-container>
-        <ng-container matColumnDef="location">
-            <th mat-header-cell *matHeaderCellDef><b>Location</b></th>
-            <td mat-cell *matCellDef="let element"> {{element.location}} </td>
-        </ng-container>
-        <ng-container matColumnDef="icao">
-            <th mat-header-cell *matHeaderCellDef><b>ICAO/IATA</b></th>
-            <td mat-cell *matCellDef="let element"> {{element.icao}} </td>
-        </ng-container>
-        <ng-container matColumnDef="dodaac">
-            <th mat-header-cell *matHeaderCellDef><b>DoDAAC</b></th>
-            <td mat-cell *matCellDef="let element"> {{element.dodaac}} </td>
-        </ng-container>
-        <ng-container matColumnDef="tail">
-            <th mat-header-cell *matHeaderCellDef><b>Tail</b></th>
-            <td mat-cell *matCellDef="let element"> {{element.tail}} </td>
-        </ng-container>
-        <ng-container matColumnDef="item">
-            <th mat-header-cell *matHeaderCellDef><b>Item</b></th>
-            <td mat-cell *matCellDef="let element"> {{element.item}} </td>
-        </ng-container>
-        <ng-container matColumnDef="total">
-            <th mat-header-cell *matHeaderCellDef><b>Total</b></th>
-            <td mat-cell *matCellDef="let element"> {{element.total | currency: 'USD'}} </td>
-        </ng-container>
-        <ng-container matColumnDef="card">
-            <th mat-header-cell *matHeaderCellDef><b>Card</b></th>
-            <td mat-cell *matCellDef="let element"> {{element.card}} </td>
-        </ng-container>
-        <ng-container matColumnDef="status">
-            <th mat-header-cell *matHeaderCellDef><b>Status</b></th>
-            <td mat-cell *matCellDef="let element" class="text-primary"> {{element.status}} </td>
-        </ng-container>
+    
+    <dx-data-grid id="tableTransaction" 
+    [dataSource]="dataSource" 
+    [showBorders]="false"
+    [showColumnLines]="false" [showRowLines]="true" 
+    [rowAlternationEnabled]="true"
+     (onExporting)="exportGrid($event)"
+    
+    >
+         <!-- Filtros -->
+        <dxo-filter-row [visible]="false"></dxo-filter-row>
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+     
+        <!-- Seleccion -->
+        <dxo-selection mode="multiple"></dxo-selection>
 
-        <ng-container matColumnDef="expand">
-            <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
-            <td mat-cell *matCellDef="let element">
-            <button class="btn btn-white" aria-label="expand row" (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
-                <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
-                <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
-            </button>
-            </td>
-        </ng-container>
+        <!-- Paginacion -->
+         <dxo-paging [pageSize]="10"></dxo-paging>
+         <dxo-pager [showPageSizeSelector]="true" [visible]="true" [allowedPageSizes]="[ 10, 20, 50, 100]" [showInfo]="true"></dxo-pager>
+     
+         <!-- Exportar -->
+         <dxo-export [enabled]="true" [allowExportSelectedData]="true"  
+         [formats]="['xlsx', 'pdf']"></dxo-export>
+     
+         <!-- Operaciones Remotas -->
+         <dxo-remote-operations [filtering]="true" [sorting]="true" [grouping]="false" [paging]="true" [summary]="true"></dxo-remote-operations>
+     
+         <!-- Modificacion columnas -->
+         <dxo-column-chooser mode="select" [allowSearch]="false"></dxo-column-chooser>
+        
+         <dxo-search-panel [visible]="true"></dxo-search-panel>
+        
+         <dxo-master-detail [enabled]="true" template="detail"></dxo-master-detail>
 
-        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-        <ng-container matColumnDef="expandedDetail">
-            <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
-                <div class="example-element-detail"
-                    [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+        <!-- Columnas -->       
+        <dxi-column dataField="date"  dataType="date"></dxi-column>
+        <dxi-column dataField="merchInvoice" caption="Merchant Invoce"></dxi-column>
+        <dxi-column dataField="merchant"></dxi-column>
+        <dxi-column dataField="location"></dxi-column>
+        <dxi-column dataField="icao" caption="ICAO/IATA"></dxi-column>
+        <dxi-column dataField="dodaac" caption="DoDAAC"></dxi-column>
+        <dxi-column dataField="tail" caption="Tail"></dxi-column>
+        <dxi-column dataField="item" caption="Item"></dxi-column>
+        <dxi-column dataField="total" cellTemplate="total" caption="Total"></dxi-column>
+        <dxi-column dataField="card" caption="Card"></dxi-column>
+        <dxi-column dataField="status" cellTemplate="status" caption="Status"></dxi-column>
+        
+        <div *dxTemplate="let row of 'total'">
+            {{row.value | currency: 'USD'}}
+        </div>
+        <div *dxTemplate="let row of 'status'" class="text-primary">
+            {{row.value}}
+        </div>
+
+        <div *dxTemplate="let element of 'detail'">
+            <div class="master-detail-caption">                
+                <div class="example-element-detail">
                     <div class="row padding1">
                         <div id="carouselExampleControlsNoTouching" class="carousel slide col-sm-4" data-bs-touch="false">
                             <div class="carousel-inner">
@@ -112,8 +86,8 @@
                                     <th scope="col">Amount</th>
                                     <th scope="col"></th>
                                 </tr>
-                                <tr *ngFor="let item of element.detail">
-                                    <td>{{item.merchantDescription}}</td>
+                                <tr *ngFor="let item of element.key.detail">
+                                    <td>{{item.productCode}}</td>
                                     <td>{{item.productCode}}</td>
                                     <td>{{item.quantity}}</td>
                                     <td>{{item.retailPrice | currency: 'USD'}}</td>
@@ -128,13 +102,13 @@
                                 </tr>
                                 <tr>
                                     <th colspan="4">Total</th>
-                                    <th>{{element.total  | currency: 'USD'}}</th>
+                                    <th>{{element.key.total  | currency: 'USD'}}</th>
                                 </tr>
                             </table>
                             <div class="content-history">  
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <p><b>Card Number</b> {{element.card}}</p>
+                                        <p><b>Card Number</b> {{element.key.card}}</p>
                                     </div>
                                     <div class="col-sm-8">
                                     <table class="text-black-50">
@@ -144,40 +118,25 @@
                                         </tr>
                                         <tr>
                                             <td>Transaction Created</td>
-                                            <td>{{element.transactionCreated | date: 'short'}}</td>
+                                            <td>{{element.key.transactionCreated | date: 'short'}}</td>
                                         </tr>
                                         <tr>
                                             <td>Transaction Delayed</td>
-                                            <td>{{element.transactionDelayed | date: 'short'}}</td>
+                                            <td>{{element.key.transactionDelayed | date: 'short'}}</td>
                                         </tr>
                                     </table>
                                     <div class="form-floating">
                                         <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
                                         <label for="floatingTextarea2">Comments</label>
-                                        <button>Enviar</button>
                                     </div>
                                     </div>
                                 </div> 
                             </div>                                       
                         </div>
                     </div>                                       
-                </div>
-            </td>
-        </ng-container>
+                </div>                    
+            </div>           
+        </div>
 
-        <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
-        <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;"
-            class="example-element-row"
-            [class.example-expanded-row]="expandedElement === element"
-            (click)="expandedElement = expandedElement === element ? null : element">
-        </tr>
-        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-    </table>
-    <mat-paginator #paginator 
-    [length]="totalPages" 
-    [pageSize]="pageSize" 
-    [pageSizeOptions]="pageSizeOptions"            
-    (page)="pageEventClic($event)"
-        >           
-    </mat-paginator>
+    </dx-data-grid>
 </div> 
