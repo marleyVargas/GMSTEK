@@ -1,5 +1,4 @@
-<br>
-<div class="container">   
+<div class="card content">   
     <div class="card bg-primary">
         <div class="card-body">
         <div class="row">
@@ -7,37 +6,37 @@
               <div class="card">
                 <div class="card-body">
                     <table class="example-full-width" cellspacing="0">
-                        <tr><td><p class="h5">Accept Transactions</p></td></tr>
-                        <tr><td rowspan="3"><p class="h5">6</p></td></tr>
-                        <tr>
+                        <tr><td><p class="h5 text-center">Accept Transactions</p></td></tr>
+                        <tr><td rowspan="3"><p class="h5 text-center">{{acceptTransactions.count}}</p></td></tr>
+                        <tr class="text-primary">
                             <td>New</td>
-                            <td>6</td>                            
+                            <td>{{acceptTransactions.new}}</td>                            
                         </tr>
-                        <tr>
+                        <tr class="text-primary">
                             <td>Disputed</td>
-                            <td>0</td>
+                            <td>{{acceptTransactions.disputed}}</td>
                         </tr>
                     </table>
                 </div>
               </div>
             </div>
-            <div class="col-sm-8">
+            <div class="col-sm-6">
               <div class="card">
                 <div class="card-body">
                     <table class="example-full-width" cellspacing="0">
-                    <tr><td><p class="h5">Invoice Task</p></td></tr>
-                    <tr><td rowspan="3"><p class="h5">4</p></td></tr>
-                    <tr>
+                    <tr><td><p class="h5 text-center">Invoice Task</p></td></tr>
+                    <tr><td rowspan="3"><p class="h5 text-center">{{invoiceTask.count}}</p></td></tr>
+                    <tr class="text-primary">
                         <td>New</td>
-                        <td>3</td>
+                        <td>{{invoiceTask.new}}</td>
                         <td>Disputed</td>
-                        <td>0</td>
+                        <td>{{invoiceTask.disputed}}</td>
                     </tr>
-                    <tr>
+                    <tr class="text-primary">
                         <td>Delinquent</td>
-                        <td>1</td>
+                        <td>{{invoiceTask.delinquent}}</td>
                         <td>Rejected</td>
-                        <td>0</td>
+                        <td>{{invoiceTask.rejected}}</td>
                     </tr>
                     </table>
                 </div>
@@ -48,61 +47,12 @@
     </div>  
 
     <div>
+        <br>
         <p class="h3">Current Transactions</p>
 
         <mat-tab-group mat-align-tabs="start">
-            <mat-tab label="6 Transactions to Accept">
-                <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
-                    <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
-                        <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-                        <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="expand">
-                        <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
-                        <td mat-cell *matCellDef="let element">
-                        <button mat-icon-button aria-label="expand row" (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
-                            <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
-                            <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
-                        </button>
-                        </td>
-                    </ng-container>
-
-                    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-                    <ng-container matColumnDef="expandedDetail">
-                        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
-                        <div class="example-element-detail"
-                            [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-                            <div class="example-element-diagram">
-                            <div class="example-element-position"> {{element.position}} </div>
-                            <div class="example-element-symbol"> {{element.symbol}} </div>
-                            <div class="example-element-name"> {{element.name}} </div>
-                            <div class="example-element-weight"> {{element.weight}} </div>
-                            </div>
-                            <div class="example-element-description">
-                            {{element.description}}
-                            <span class="example-element-description-attribution"> -- Wikipedia </span>
-                            </div>
-                        </div>
-                        </td>
-                    </ng-container>
-
-                    <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
-                    <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;"
-                        class="example-element-row"
-                        [class.example-expanded-row]="expandedElement === element"
-                        (click)="expandedElement = expandedElement === element ? null : element">
-                    </tr>
-                    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-
-                    <mat-paginator #paginator 
-                        [length]="totalPages" 
-                        [pageSize]="pageSize" 
-                        [pageSizeOptions]="pageSizeOptions"            
-                        (page)="pageEventClic($event)"
-                        showFirstLastButtons >           
-                    </mat-paginator>
-                </table>
-                
+            <mat-tab label="{{acceptTransactions.count}} Transactions to Accept">
+               <app-transaction-accept></app-transaction-accept>               
             </mat-tab>
             <mat-tab label="42 Transactions to Review"></mat-tab>
         </mat-tab-group>

@@ -2,7 +2,9 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { PeriodicElement, Transaction } from '../Interfaces/transaction';
+import { Dashboard } from '../models/dashboard';
+import { Transaction } from '../models/transaction';
+import { DashboardService } from '../Services/dashboard.service';
 import { TransactionService } from '../Services/transaction.service';
 
 @Component({
@@ -19,55 +21,23 @@ import { TransactionService } from '../Services/transaction.service';
 })
 
 export class HomeComponent implements OnInit {
-  data!: MatTableDataSource<any>;
 
   constructor(
     public transactionService: TransactionService,
+    public dashboardServicice: DashboardService,
   ) { }
-
-  dataSource = <any>[];
-  columnsToDisplay = ['name', 'weight', 'symbol', 'position'];
-  columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
-  expandedElement!: PeriodicElement | null;
-
-
-  @ViewChild(MatPaginator) set paginator(pag: MatPaginator) {
-    if (pag) this.data.paginator = pag;
-  }
  
-    // MatPaginator Inputs
-    length = 100;
-    pageSize = 5;
-    pageSizeOptions: number[] = [];
-  
-    // MatPaginator Output
-    pageEvent!: PageEvent;
-
-    paginaConsulta: number = 1;
-    totalRegister: number = this.dataSource.length;
-    currentPage: number = 0;
-    totalPages: number = this.dataSource.length/10;
-  
-    setPageSizeOptions(setPageSizeOptionsInput: string) {
-      if (setPageSizeOptionsInput) {
-        this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
-      }
-    }
-    
-
+  acceptTransactions!: Dashboard;
+  invoiceTask!: Dashboard;
+     
   ngOnInit(): void {
-    this.getData();
+    this.getDashboard();
   }
 
-  getData() {
-    this.dataSource = this.transactionService.getData()
+  getDashboard() {
+    this.acceptTransactions = this.dashboardServicice.getTransactionsAccept();
+    this.invoiceTask = this.dashboardServicice.getInvoiceTask();
   }
 
-  pageEventClic(pageEvent: PageEvent) {
-    this.paginaConsulta += 1;
-    if(this.paginaConsulta <= this.totalPages){
-      this.getData();
-    }      
-  }
 
 }

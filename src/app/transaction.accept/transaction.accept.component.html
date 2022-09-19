@@ -1,0 +1,183 @@
+<div class="card-body">
+    <div class="row">
+        <div class="col-sm-9">
+            <div class="d-flex flex-row mb-3">
+                <form class="d-flex col-sm-8 me-md-2" role="flex Search">
+                    <input class="form-control me-auto" type="search" placeholder="Search transactions by Merchant Invoice, Card, ICAO, Tail # or DoDAAC" aria-label="Search">
+                </form>
+                <button class="btn btn-light">
+                    <i class="fa fa-filter"></i>
+                    Filter
+                </button>
+            </div>
+        </div>
+        <div class="col-sm-3">                    
+            <button class="btn btn-light me-md-4"><mat-icon>local_printshop</mat-icon>Print Selected</button>
+            <button class="btn btn-light"><mat-icon> import_export</mat-icon>Export Selected</button>
+        </div>
+     </div>
+</div>
+<div class="card-body">
+    <table id="tableTransaction" mat-table 
+    [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8"
+    [showColumnLines]="false" [showRowLines]="true" [showBorders]="true" [rowAlternationEnabled]="true"
+    [columnAutoWidth]="true" [allowColumnReordering]="true" [allowColumnResizing]="true">
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef><b>Date</b></th>
+            <td mat-cell *matCellDef="let element"> {{element.date | date: "MM/dd/yy"}} </td>
+        </ng-container>
+        <ng-container matColumnDef="merchInvoice">
+            <th mat-header-cell *matHeaderCellDef><b>Merchant Invoce</b></th>
+            <td mat-cell *matCellDef="let element"> {{element.merchInvoice}} </td>
+        </ng-container>
+        <ng-container matColumnDef="merchant">
+            <th mat-header-cell *matHeaderCellDef><b>Merchant</b></th>
+            <td mat-cell *matCellDef="let element"> {{element.merchant}} </td>
+        </ng-container>
+        <ng-container matColumnDef="location">
+            <th mat-header-cell *matHeaderCellDef><b>Location</b></th>
+            <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+        </ng-container>
+        <ng-container matColumnDef="icao">
+            <th mat-header-cell *matHeaderCellDef><b>ICAO/IATA</b></th>
+            <td mat-cell *matCellDef="let element"> {{element.icao}} </td>
+        </ng-container>
+        <ng-container matColumnDef="dodaac">
+            <th mat-header-cell *matHeaderCellDef><b>DoDAAC</b></th>
+            <td mat-cell *matCellDef="let element"> {{element.dodaac}} </td>
+        </ng-container>
+        <ng-container matColumnDef="tail">
+            <th mat-header-cell *matHeaderCellDef><b>Tail</b></th>
+            <td mat-cell *matCellDef="let element"> {{element.tail}} </td>
+        </ng-container>
+        <ng-container matColumnDef="item">
+            <th mat-header-cell *matHeaderCellDef><b>Item</b></th>
+            <td mat-cell *matCellDef="let element"> {{element.item}} </td>
+        </ng-container>
+        <ng-container matColumnDef="total">
+            <th mat-header-cell *matHeaderCellDef><b>Total</b></th>
+            <td mat-cell *matCellDef="let element"> {{element.total | currency: 'USD'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="card">
+            <th mat-header-cell *matHeaderCellDef><b>Card</b></th>
+            <td mat-cell *matCellDef="let element"> {{element.card}} </td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef><b>Status</b></th>
+            <td mat-cell *matCellDef="let element" class="text-primary"> {{element.status}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="expand">
+            <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+            <td mat-cell *matCellDef="let element">
+            <button class="btn btn-white" aria-label="expand row" (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
+                <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
+                <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
+            </button>
+            </td>
+        </ng-container>
+
+        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+        <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
+                <div class="example-element-detail"
+                    [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                    <div class="row padding1">
+                        <div id="carouselExampleControlsNoTouching" class="carousel slide col-sm-4" data-bs-touch="false">
+                            <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" role="img" aria-label="Placeholder: First slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#555" dy=".3em">First slide</text></svg>
+                            </div>
+                            <div class="carousel-item">
+                                <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" role="img" aria-label="Placeholder: Second slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#666"></rect><text x="50%" y="50%" fill="#444" dy=".3em">Second slide</text></svg>
+                            </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                        <div class="col-sm-8">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th scope="col">Merchant Description</th>
+                                    <th scope="col">Product Code</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Retail Price</th>
+                                    <th scope="col">Gov Price</th>
+                                    <th scope="col">Amount</th>
+                                    <th scope="col"></th>
+                                </tr>
+                                <tr *ngFor="let item of element.detail">
+                                    <td>{{item.merchantDescription}}</td>
+                                    <td>{{item.productCode}}</td>
+                                    <td>{{item.quantity}}</td>
+                                    <td>{{item.retailPrice | currency: 'USD'}}</td>
+                                    <td>{{item.govPrice | currency: 'USD'}}</td>
+                                    <td>{{item.amount | currency: 'USD'}}</td>
+                                    <td>
+                                        <div class="d-grid gap-2 d-md-block">
+                                            <button class="btn btn-dark me-md-2 btn-sm" type="button">Dispute</button>
+                                            <button class="btn btn-primary btn-sm" type="button">Accept</button>
+                                          </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="4">Total</th>
+                                    <th>{{element.total  | currency: 'USD'}}</th>
+                                </tr>
+                            </table>
+                            <div class="content-history">  
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <p><b>Card Number</b> {{element.card}}</p>
+                                    </div>
+                                    <div class="col-sm-8">
+                                    <table class="text-black-50">
+                                        <tr>
+                                            <td>History</td>
+                                            <td>Date and Time</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Transaction Created</td>
+                                            <td>{{element.transactionCreated | date: 'short'}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Transaction Delayed</td>
+                                            <td>{{element.transactionDelayed | date: 'short'}}</td>
+                                        </tr>
+                                    </table>
+                                    <div class="form-floating">
+                                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                                        <label for="floatingTextarea2">Comments</label>
+                                        <button>Enviar</button>
+                                    </div>
+                                    </div>
+                                </div> 
+                            </div>                                       
+                        </div>
+                    </div>                                       
+                </div>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;"
+            class="example-element-row"
+            [class.example-expanded-row]="expandedElement === element"
+            (click)="expandedElement = expandedElement === element ? null : element">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    </table>
+    <mat-paginator #paginator 
+    [length]="totalPages" 
+    [pageSize]="pageSize" 
+    [pageSizeOptions]="pageSizeOptions"            
+    (page)="pageEventClic($event)"
+        >           
+    </mat-paginator>
+</div> 

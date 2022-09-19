@@ -17,12 +17,14 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { LayoutComponent } from './layout/layout.component';
+import { TransactionAcceptComponent } from './transaction.accept/transaction.accept.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LayoutComponent
+    LayoutComponent,
+    TransactionAcceptComponent
   ],
   imports: [
     BrowserModule,

@@ -1,16 +1,123 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { PeriodicElement, Transaction } from "../Interfaces/transaction";
+import { Transaction } from "../models/transaction";
+import { TransactionDetail } from "../models/transactionDetail";
 
-const ELEMENT_DATA: PeriodicElement[] = [
+const detail : TransactionDetail[] = [
     {
-      position: 1,
-      name: 'Hydrogen',
-      weight: 1.0079,
-      symbol: 'H',
-      description: `Hydrogen is a chemical element with symbol H and atomic number 1. With a standard
-          atomic weight of 1.008, hydrogen is the lightest element on the periodic table.`,
+        merchantDescription: 'JetA',
+        productCode: 9130013054097,
+        quantity: '1,926 gal',
+        retailPrice: 4.36,
+        govPrice: 4.36,
+        amount: 8397.36
+    },
+    {
+        merchantDescription: 'Cleaning',
+        productCode: 1019,
+        quantity: '1',
+        retailPrice: 324.11,
+        govPrice: 302.14,
+        amount: 302.14
     }
+];
+
+const ELEMENT_DATA: Transaction[] = [
+    {
+      date: new Date(21,9,25,8,15,0,0),
+      merchInvoice: 123456,
+      merchant: 'ABC Fuel Company',
+      location: 'Miami International Air',
+      icao: 'KMIA/MIA',
+      dodaac: 'FP217',
+      tail: '2F567E',
+      item: 'Fuel & Services',
+      total: 8699.50,
+      card: 'AIR Card 1234',
+      status: 'New',
+      detail: detail,
+      transactionCreated: new Date(21,9,25,8,15,0,0),
+      transactionDelayed: new Date(21,9,30,8,15,0,0),
+    },
+    {
+        date: new Date(21,10,1,8,15,0,0),
+        merchInvoice: 542141,
+        merchant: 'DEF Fuel Company',
+        location: 'Miami International Air',
+        icao: 'KMIA/MIA',
+        dodaac: 'FP217',
+        tail: '2F567E',
+        item: 'Services',
+        total: 8699.50,
+        card: 'AIR Card 1234',
+        status: 'New',
+        detail: detail,
+        transactionCreated: new Date(21,9,25,8,15,0,0),
+        transactionDelayed: new Date(21,9,30,8,15,0,0),
+      },
+      {
+        date: new Date(21,10,1,8,15,0,0),
+        merchInvoice: 123456,
+        merchant: 'ABC Fuel Company',
+        location: 'Miami International Air',
+        icao: 'KMIA/MIA',
+        dodaac: 'FP217',
+        tail: '2F567E',
+        item: 'Services',
+        total: 324.11,
+        card: 'AIR Card 1234',
+        status: 'New',
+        detail: detail,
+        transactionCreated: new Date(21,9,25,8,15,0,0),
+        transactionDelayed: new Date(21,9,30,8,15,0,0),
+      },
+      {
+        date: new Date(21,10,1,8,15,0,0),
+        merchInvoice: 777222,
+        merchant: 'DEF Fuel Company',
+        location: 'Miami International Air',
+        icao: 'KMIA/MIA',
+        dodaac: 'FP217',
+        tail: '2F567E',
+        item: 'Fuel & Services',
+        total: 7692.17,
+        card: 'AIR Card 1234',
+        status: 'New',
+        detail: detail,
+        transactionCreated: new Date(21,9,25,8,15,0,0),
+        transactionDelayed: new Date(21,9,30,8,15,0,0),
+      },
+      {
+        date: new Date(21,9,30,8,15,0,0),
+        merchInvoice: 777222,
+        merchant: 'ABC Fuel Company',
+        location: 'Miami International Air',
+        icao: 'KMIA/MIA',
+        dodaac: 'FP217',
+        tail: '2F567E',
+        item: 'Fuel & Services',
+        total: 7692.17,
+        card: 'AIR Card 1234',
+        status: 'New',
+        detail: detail,
+        transactionCreated: new Date(21,9,25,8,15,0,0),
+        transactionDelayed: new Date(21,9,30,8,15,0,0),
+      },
+      {
+        date: new Date(21,9,30,8,15,0,0),
+        merchInvoice: 777222,
+        merchant: 'DEF Fuel Company',
+        location: 'Miami International Air',
+        icao: 'KMIA/MIA',
+        dodaac: 'FP217',
+        tail: '2F567E',
+        item: 'Fuel & Services',
+        total: 7692.17,
+        card: 'AIR Card 1234',
+        status: 'New',
+        detail: detail,
+        transactionCreated: new Date(21,9,25,8,15,0,0),
+        transactionDelayed: new Date(21,9,30,8,15,0,0),
+      }
     
   ];
 

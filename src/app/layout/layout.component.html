@@ -1,21 +1,24 @@
 <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
         <form class="d-flex col-sm-8" role="Search">
-            <input class="form-control me-auto" type="search" placeholder="transactions, invoces, cards, or merchants" aria-label="Search">
+            <span class="input-group-text" id="basic-addon1">
+                <mat-icon>search</mat-icon>         
+              </span>
+            <input class="form-control me-auto" type="search" placeholder="Transactions, invoces, cards, or merchants" aria-label="Search">
         </form>
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-                <i class="bi bi-badge-4k"></i>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled">Disabled</a>
-            </li>
-        </ul>
-        <a class="navbar-brand" href="#">Jim Willey</a>
-        <img />
+        <button class="btn btn-white "><mat-icon>notification_important</mat-icon></button>
+        
+        <div class="d-flex dropdown">
+            <button class="btn btn-white dropdown-toggle navbar-brand btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Jim Willey
+                <img src="../../assets/img/profile.png" class="profile"/>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+        </div>
     </div>
 </nav>
 <app-home></app-home>
