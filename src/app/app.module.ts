@@ -12,6 +12,7 @@ import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DxDataGridModule } from 'devextreme-angular';
+import { DxButtonModule } from 'devextreme-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -44,6 +45,7 @@ import { TransactionAcceptComponent } from './transaction.accept/transaction.acc
     MatPaginatorModule,
     FontAwesomeModule,    
     DxDataGridModule,
+    DxButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

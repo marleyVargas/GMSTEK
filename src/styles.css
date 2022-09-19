@@ -2,3 +2,16 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.dx-datagrid-headers {
+    color: black !important;
+    font-weight: bold;
+  }
+
+.dx-checkbox-icon{
+   border-color: black;
+}
+
+.text-primary{
+    color: #0652C0 !important;
+    font-weight: 600;
+}

@@ -1,4 +1,4 @@
-<div class="card content">   
+<div class="card content bgsecundary">   
     <div class="card bg-primary">
         <div class="card-body">
         <div class="row">
@@ -52,9 +52,12 @@
 
         <mat-tab-group mat-align-tabs="start">
             <mat-tab label="{{acceptTransactions.count}} Transactions to Accept">
-               <app-transaction-accept></app-transaction-accept>               
+                <div class="card">
+                    <app-transaction-accept></app-transaction-accept>   
+               </div>            
             </mat-tab>
-            <mat-tab label="42 Transactions to Review"></mat-tab>
+            <mat-tab label="42 Transactions to Review">
+            </mat-tab>
         </mat-tab-group>
     </div>
 </div>

@@ -1,24 +1,23 @@
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-expand-lg bgwhite">
     <div class="container-fluid">
-        <form class="d-flex col-sm-8" role="Search">
-            <span class="input-group-text" id="basic-addon1">
-                <mat-icon>search</mat-icon>         
-              </span>
-            <input class="form-control me-auto" type="search" placeholder="Transactions, invoces, cards, or merchants" aria-label="Search">
+        <div class="float-start col-sm-8">
+        <form class="d-flex" role="Search"> 
+            <input class="form-control me-auto" type="search" placeholder="Search transactions, invoices, cards, or merchants" aria-label="Search">
         </form>
-        <button class="btn btn-white "><mat-icon>notification_important</mat-icon></button>
-        
-        <div class="d-flex dropdown">
-            <button class="btn btn-white dropdown-toggle navbar-brand btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Jim Willey
-                <img src="../../assets/img/profile.png" class="profile"/>
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
         </div>
+        <div class="d-flex flex-row-reverse col-sm-4">
+            <div class="dropdown">
+                <button class="btn btn-white dropdown-toggle navbar-brand btn-sm text-black-50 text-sm" type="button" data-bs-toggle="dropdown" aria-expanded="true">
+                    <small>Jim Willey </small> 
+                    <img src="../../assets/img/profile.png" class="profile"/>
+                </button>               
+            </div> 
+            <div>
+                <button class="btn btn-white btn-sm  text-black-50"><mat-icon>group_work</mat-icon></button>
+                <button class="btn btn-white btn-sm  text-black-50"><mat-icon matBadge="1" matBadgeColor="warn">notification_important</mat-icon></button>
+            </div>
+           
+          </div>        
     </div>
 </nav>
 <app-home></app-home>

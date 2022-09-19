@@ -10,6 +10,8 @@ import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver';
 import { exportDataGrid as exportDataGridToPdf } from 'devextreme/pdf_exporter';
 import { jsPDF } from 'jspdf';
+import Button from "devextreme/ui/button";
+
 
 
 @Component({
@@ -73,4 +75,5 @@ export class TransactionAcceptComponent implements OnInit {
   seleccionarColumnas() {
     this.dataGrid.instance.showColumnChooser();
   }
+  
 }
