@@ -6,67 +6,6 @@
   width: 25px;
 }
 
-
-element.style {
-}
-.dx-datagrid-nowrap, .dx-datagrid-nowrap .dx-header-row>td>.dx-datagrid-text-content {
-    white-space: nowrap;
-}
-.dx-header-row .dx-header-filter-indicator.dx-text-content-alignment-left, .dx-header-row .dx-sort-indicator.dx-text-content-alignment-left {
-    margin-right: 3px;
-}
-.dx-header-row > td > .dx-datagrid-text-content {
-    display: inline-block;
-    white-space: normal;
-    vertical-align: top;
-}
-.dx-header-row .dx-header-filter-indicator, .dx-header-row .dx-sort-indicator {
-    max-width: calc(100% - 17px);
-}
-.dx-header-row .dx-text-content-alignment-left, .dx-header-row .dx-text-content-alignment-right, .dx-header-row>td>.dx-treelist-text-content:not(.dx-sort-indicator):not(.dx-header-filter-indicator) {
-    max-width: 100%;
-}
-.dx-datagrid-content .dx-overlay-wrapper.dx-invalid-message.dx-datagrid-invalid-message .dx-overlay-content, .dx-datagrid-text-content {
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.dx-widget, .dx-widget *, .dx-widget ::after, .dx-widget ::before, .dx-widget::after, .dx-widget::before {
-    box-sizing: border-box;
-}
-*, ::after, ::before {
-    box-sizing: border-box;
-}
-user agent stylesheet
-div {
-    display: block;
-}
-style attribute {
-    text-align: left;
-}
-.dx-header-row > td {
-    white-space: nowrap;
-    overflow: hidden;
-}
-.dx-datagrid-action, .dx-datagrid-drag-action {
-    cursor: pointer;
-}
-.dx-datagrid-content .dx-datagrid-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    margin: 0;
-    max-width: 10px;
-}
-table {
-    caption-side: bottom;
-    border-collapse: collapse;
-}
-user agent stylesheet
-table {
-    border-collapse: separate;
-    text-indent: initial;
-    border-spacing: 2px;
-}
-
 .bgwhite{
   background-color: white;
 }

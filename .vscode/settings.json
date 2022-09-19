@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/a22ac6aa-1b69-400d-a15b-fb3e6ae34c21/AppServices/subscriptions/a22ac6aa-1b69-400d-a15b-fb3e6ae34c21/resourceGroups/Web/providers/Microsoft.Web/sites/GMSTEK",
+    "appService.deploySubpath": "dist\\gmstek"
+}

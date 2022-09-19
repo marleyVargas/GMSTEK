@@ -4,6 +4,7 @@
     [showBorders]="false"
     [showColumnLines]="false" [showRowLines]="true" 
     [rowAlternationEnabled]="true"
+    [columnWidth]="107"
      (onExporting)="exportGrid($event)"    
     >     
         <!-- Filtros -->
@@ -31,6 +32,7 @@
         
          <dxo-master-detail [enabled]="true" template="detail"></dxo-master-detail>
 
+         
         <!-- Columnas -->       
         <dxi-column dataField="date" dataType="date"></dxi-column>
         <dxi-column dataField="merchInvoice" caption="Merchant Invoce"></dxi-column>

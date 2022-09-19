@@ -2,10 +2,16 @@ table {
     width: 100%;
   }
 
+  @media (min-width: 992px) { 
   .content-history{
      margin-top:8%;
   }
+  
+  .content-history p{
+    margin-top: 62% !important;
+  }
 
+}
   .content{
     padding: 1em !important;
     border: none !important;
@@ -13,10 +19,6 @@ table {
 
   .padding1{
     padding: 1em;
-  }
-
-  .content-history p{
-    margin-top: 62% !important;
   }
 
   

@@ -1,22 +1,19 @@
 <nav class="navbar navbar-expand-lg bgwhite">
     <div class="container-fluid">
-        <div class="float-start col-sm-8">
-        <form class="d-flex" role="Search"> 
-            <input class="form-control me-auto" type="search" placeholder="Search transactions, invoices, cards, or merchants" aria-label="Search">
-        </form>
+        <div class="col-md-8">
+            <form role="Search"> 
+                <input class="form-control me-auto" type="search" placeholder="Search transactions, invoices, cards, or merchants" aria-label="Search">
+            </form>
         </div>
-        <div class="d-flex flex-row-reverse col-sm-4">
-            <div class="dropdown">
-                <button class="btn btn-white dropdown-toggle navbar-brand btn-sm text-black-50 text-sm" type="button" data-bs-toggle="dropdown" aria-expanded="true">
-                    <small>Jim Willey </small> 
-                    <img src="../../assets/img/profile.png" class="profile"/>
-                </button>               
-            </div> 
-            <div>
+        <div class="d-flex flex-row-reverse">
+            <div class="btn-group" role="group" aria-label="Basic example">
                 <button class="btn btn-white btn-sm  text-black-50"><mat-icon>group_work</mat-icon></button>
                 <button class="btn btn-white btn-sm  text-black-50"><mat-icon matBadge="1" matBadgeColor="warn">notification_important</mat-icon></button>
-            </div>
-           
+                <button class="btn btn-white dropdown-toggle navbar-brand btn-sm text-black-50 text-sm" type="button" aria-expanded="true">
+                    <small>Jim Willey </small> 
+                    <img src="../../assets/img/profile.png" class="profile"/>
+                </button> 
+              </div>           
           </div>        
     </div>
 </nav>
